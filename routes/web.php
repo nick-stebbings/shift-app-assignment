@@ -28,3 +28,7 @@ Route::get('/shifts', function () {
 Route::get('/shift/{id}/edit', function () {
     return view('shift-edit');
 });
+
+Route::get('/shifts/new', function () {
+    return view('shift-create');
+});

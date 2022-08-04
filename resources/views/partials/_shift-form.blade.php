@@ -1,5 +1,4 @@
-<section class="mt-12 w-full flex flex-col items-center justify-center">
-
+<section class="mt-2 w-full flex flex-col items-center justify-center">
     <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
         <form>
             <div class="mb-3 xl:w-96">
