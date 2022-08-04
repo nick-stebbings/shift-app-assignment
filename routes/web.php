@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/wages', function () {
+    return view('wages');
+});
+
+Route::get('/shifts', function () {
+    return view('shifts-list');
+});
+
+Route::get('/shift/{id}/edit', function () {
+    return view('shift-edit');
+});
