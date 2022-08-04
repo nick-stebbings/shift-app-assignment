@@ -15,10 +15,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->middleware(['auth'])->name('/');
+
+Route::get('/wages', function () {
+    return view('wages');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/shifts', function () {
+    return view('shifts-list');
+});
+
+Route::get('/shift/{id}/edit', function () {
+    return view('shift-edit');
+});
+
+Route::get('/shifts/new', function () {
+    return view('shift-create');
+});
 
 require __DIR__.'/auth.php';

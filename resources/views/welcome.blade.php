@@ -1,5 +1,4 @@
-@extends('layout')
-
+@extends('layouts/app')
 @section('content')
 
     <main class="w-full flex flex-col items-center gap-y-8 mt-4">
