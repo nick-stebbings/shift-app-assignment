@@ -19,18 +19,18 @@ Route::get('/', function () {
 
 Route::get('/wages', function () {
     return view('wages');
-});
+})->middleware(['auth'])->name('/wages');
 
 Route::get('/shifts', function () {
     return view('shifts-list');
-});
+})->middleware(['auth'])->name('/shifts');
 
 Route::get('/shift/{id}/edit', function () {
     return view('shift-edit');
-});
+})->middleware(['auth'])->name('/shifts');
 
 Route::get('/shifts/new', function () {
     return view('shift-create');
-});
+})->middleware(['auth'])->name('/shifts');
 
 require __DIR__.'/auth.php';
