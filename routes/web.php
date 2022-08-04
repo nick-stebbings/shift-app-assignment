@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Cat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/cats/{name}', function ($name) {
-    return view('cats', Cat::getAll());
 });
