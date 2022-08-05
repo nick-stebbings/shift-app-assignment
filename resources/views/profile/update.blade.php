@@ -5,9 +5,9 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form action="{{ url('api/user/update') }}">
+        <form action="{{ url('api/user/' . $profile['id']) }}"  method="POST">
+            <?php echo method_field('PUT'); ?>
             @csrf
-            @method('PUT')
 
             <!-- Email Address -->
             <div class="mt-4">
@@ -23,7 +23,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" />
+                                autocomplete="new-password" />
             </div>
 
             <!-- Confirm Password -->
@@ -32,14 +32,14 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required />
+                                name="password_confirmation" />
             </div>
 
 
             <x-label class="block mt-2" for="floatingInput" :value="__('Date of Birth')" />
             <div class="datepicker datepicker relative form-floating" data-mdb-toggle-button="false">
                 <x-input type="text"
-                  class="block mt-2 w-full" />
+                  class="block mt-2 w-full" required />
                 <button class="datepicker-toggle-button" data-mdb-toggle="datepicker">
                   <i class="fas fa-calendar datepicker-toggle-icon"></i>
                 </button>

@@ -59,23 +59,15 @@ class RegisteredUserController extends Controller
 
     public function update(Request $request)
     {
-        $profile = [ 'name' => Auth::user()->name, 'email' => Auth::user()->email];
+        $profile = [ 'id' => $request->user()->id, 'name' => Auth::user()->name, 'email' => Auth::user()->email];
         
         return view('profile.update', compact('profile'));
+    }
 
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'employee-identifier' => ['string',],
-            'dob' => 'date_format:m/d/Y|before:today'
-        ]);
-
-        // $user = User::where('id',3)->update([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ]);
-
-        return redirect(RouteServiceProvider::HOME);
+    
+    public function assignEmployee(Request $request, $id)
+    {
+        dd($id);
+        return view('profile.update', compact('profile'));
     }
 }

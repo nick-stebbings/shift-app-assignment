@@ -19,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::controller(App\Http\Controllers\Auth\RegisteredUserController::class)->group(function () {
-    Route::put('/user', 'update')->middleware(['auth'])->name('/user');
+    Route::put('/user/{id}', 'assignEmployee');
 });
