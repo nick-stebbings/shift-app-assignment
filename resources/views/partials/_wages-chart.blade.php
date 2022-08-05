@@ -1,6 +1,6 @@
-<section class="relative top-0 w-full mt-2 md:mt-12 px-2 md:px-12 justify-center">
-    <div class="shadow-lg rounded-lg overflow-hidden">
-      <div class="py-3 px-5 bg-gray-50">Wages Breakdown</div>
+<section class="relative top-0 justify-center w-full px-2 mt-2 md:mt-12 md:px-12">
+    <div class="overflow-hidden rounded-lg shadow-lg">
+      <div class="px-5 py-3 bg-gray-50">Wages Breakdown</div>
       <canvas class="p-10" id="chartLine"></canvas>
     </div>
     

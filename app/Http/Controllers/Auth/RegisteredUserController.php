@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -54,7 +55,7 @@ class RegisteredUserController extends Controller
 
     public function fetch(Request $request)
     {
-        dd($request->user());
+        dd('Unimplemented');
     }
 
     public function update(Request $request)
@@ -65,9 +66,20 @@ class RegisteredUserController extends Controller
     }
 
     
-    public function assignEmployee(Request $request, $id)
+    public static function assignEmployee($user_id, $dob, $employee_id)
     {
-        dd($id);
-        return view('profile.update', compact('profile'));
+        $found = Employee::all()
+        ->where('dob', '=', $dob)
+        ->where('employee_identifier', '=',$employee_id);
+
+        if($found->count() !== 1) {
+
+            return redirect()->back()->with('msg', 'Erro');  
+            // return redirect()->back()->withErrors('Invalid credentials, try again');   
+        } else {
+            $emp_id = $found->toArray()[0]['id'];
+            User::where('id',$user_id)->update(['employee_id'=>$emp_id]);
+            return redirect()->back()->with('msg', 'Success! Account linked to your record');   
+        }
     }
 }
