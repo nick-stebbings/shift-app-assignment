@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return 
+// });
+
+Route::controller(App\Http\Controllers\Auth\RegisteredUserController::class)->group(function () {
+    Route::put('/user', 'update')->middleware(['auth'])->name('/user');
 });

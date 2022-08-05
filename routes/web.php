@@ -33,4 +33,9 @@ Route::get('/shifts/new', function () {
     return view('shift-create');
 })->middleware(['auth'])->name('/shifts');
 
+Route::controller(App\Http\Controllers\Auth\RegisteredUserController::class)->group(function () {
+    Route::get('/profile', 'fetch')->middleware(['auth'])->name('/user');
+    Route::get('/profile/update', 'update')->middleware(['auth'])->name('/user');
+});
+
 require __DIR__.'/auth.php';
