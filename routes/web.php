@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -10,8 +11,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteSeapi/employee/'. Auth::user()->employee_id . '/shifts group. Now create something great!
 |
 */
 
@@ -32,10 +32,14 @@ Route::get('/wages', function () {
 Route::get('/shifts', function () {
     // IF the user has admin permissions
     // THEN show all shifts, show add shift buton
-
+    $shifts = Employee::join('employee_shift', 'employee_shift.employee_id', '=', 'employees.id')
+    ->join('shifts', 'employee_shift.shift_id', '=', 'shifts.id')
+    ->join('workplace', 'shifts.workplace_id', '=', 'workplace.id')
+    ->where('employees.id', '=', Auth::user()->employee_id)
+    ->get(['accepted','shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);
     // ELSE show employeed shifts
 
-    return view('shifts-list');
+    return view('shifts-list', ['shifts' =>  $shifts]);
 })->middleware(['auth'])->name('/shifts');
 
 Route::get('/shift/{id}/edit', function () {
