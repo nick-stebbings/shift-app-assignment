@@ -5,6 +5,7 @@
     <div class="p-6">
     <p class="mb-4 text-base text-gray-700">
         <ul>
+            <li class="flex justify-between gap-x-4"><span>Date:</span><span>{{$shift -> date}}</span></li>
             <li class="flex justify-between gap-x-4"><span>Starting:</span><span>{{$shift -> starting}}</span></li>
             <li class="flex justify-between gap-x-4"><span>Ending:</span><span>{{$shift -> ending}}</span></li>
             <li class="flex justify-between gap-x-4"><span>Breaks:</span><span>{{$shift -> breaks}}</span></li>
