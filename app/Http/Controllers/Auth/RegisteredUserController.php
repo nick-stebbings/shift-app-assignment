@@ -58,10 +58,16 @@ class RegisteredUserController extends Controller
         dd('Unimplemented');
     }
 
+    public function upsert(Request $request, $id)
+    {
+        User::where('id',$id)->update(['email' => $request->email,
+        'password' => Hash::make($request->password)]);
+        return redirect('/')->with('msg', 'Success! Account linked to your record'); 
+    }
+
     public function update(Request $request)
     {
         $profile = [ 'id' => $request->user()->id, 'name' => Auth::user()->name, 'email' => Auth::user()->email];
-        
         return view('profile.update', compact('profile'));
     }
 

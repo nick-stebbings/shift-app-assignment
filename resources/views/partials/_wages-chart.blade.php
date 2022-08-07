@@ -1,5 +1,6 @@
 <main class="relative top-0 justify-center w-full px-2 mt-2 md:mt-12 md:px-12">
-  @if (!$shifts)
+
+  @if (empty($shifts->toArray()))
     No shifts have been assigned
   @else
     <div class="overflow-hidden rounded-lg shadow-lg">

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome', ['employee_id' => Auth::user()->employee_id,]);
+    return view('welcome', ['employee_id' => Auth::user()->employee_id]);
 })->middleware(['auth'])->name('/');
 
 Route::get('/wages', function () {

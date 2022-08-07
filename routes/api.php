@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::controller(RegisteredUserController::class)->group(function () {
-    Route::put('/user/{id}', 'update');
+    Route::put('/user/{id}', 'upsert');
 
     Route::post('/user/{id}/link', function (Request $request, $id) { 
         return RegisteredUserController::assignEmployee($id, $request->dob,$request->employee_identifier);
