@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,21 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('/');
 
 Route::get('/wages', function () {
-    return view('wages');
+    $emp_id = Auth::user()->employee_id;
+
+    if($emp_id != '' && !is_null($emp_id)) {
+        $shifts = EmployeeController::getAcceptedShifts(Auth::user()->employee_id)->groupBy('date');
+        return view('wages', ['shifts' => $shifts]);
+    }
+    return view('wages', ['shifts' => []]);
 })->middleware(['auth'])->name('/wages');
 
 Route::get('/shifts', function () {
+    // IF the user has admin permissions
+    // THEN show all shifts, show add shift buton
+
+    // ELSE show employeed shifts
+
     return view('shifts-list');
 })->middleware(['auth'])->name('/shifts');
 

@@ -43,7 +43,7 @@ Route::controller(EmployeeController::class)->group(function () {
             ->where('employees.id', '=', $id)
             ->get(['accepted','shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);
     });
-
+    
     Route::get('/employees', function (Request $request) {
         return Employee::all();
     });
