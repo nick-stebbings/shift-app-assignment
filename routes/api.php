@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return 
-// });
-
 Route::controller(RegisteredUserController::class)->group(function () {
     Route::put('/user/{id}', 'upsert');
 
@@ -44,6 +40,8 @@ Route::controller(EmployeeController::class)->group(function () {
             ->get(['accepted','shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);
     });
     
+
+    // NOTE: this route will require auth to be implemented and is currently exposing too much data
     Route::get('/employees', function (Request $request) {
         return Employee::all();
     });
