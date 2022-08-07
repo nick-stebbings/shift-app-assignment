@@ -1,8 +1,8 @@
 @extends('layouts/app')
 @section('content')
 
-<main class="w-full flex flex-col items-center gap-y-4 mt-4">
-    <h3 class="font-medium leading-tight text-3xl mt-0 mb-2 text-blue-600">Create a Shift</h3>
+<main class="flex flex-col items-center w-full mt-4 gap-y-4">
+    <h3 class="mt-0 mb-2 text-3xl font-medium leading-tight text-blue-600">Create a Shift (UNIMPLEMENTED)</h3>
     @include('partials._shift-form')
 </main>
 

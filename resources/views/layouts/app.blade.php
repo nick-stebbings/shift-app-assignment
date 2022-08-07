@@ -83,10 +83,8 @@
         </div>
       </nav>
    
-   @yield('content')
-   {!! Session::get("msg", '') !!}
-     
-      <footer class="absolute inset-x-0 bottom-0 text-center bg-white lg:text-left">
+      @yield('content')     
+      <footer class="absolute inset-x-0 text-center bg-white lg:text-left">
         <div class="p-4 text-center text-gray-700" style="background-color: rgba(0, 0, 0, 0.02;">
           © 2021 Copyright:
           <a class="text-gray-800" href="https://tailwind-elements.com/">Shiftly</a>

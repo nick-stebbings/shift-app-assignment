@@ -80,8 +80,7 @@ class RegisteredUserController extends Controller
 
         if($found->count() !== 1) {
 
-            return redirect()->back()->with('msg', 'Erro');  
-            // return redirect()->back()->withErrors('Invalid credentials, try again');   
+            return redirect()->back()->with('msg', 'Error');  
         } else {
             $emp_id = $found->values()->toArray()[0]['id'];
             User::where('id',$user_id)->update(['employee_id'=>$emp_id]);

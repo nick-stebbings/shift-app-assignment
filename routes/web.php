@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Models\Employee;
+use App\Models\Shift;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,16 +32,33 @@ Route::get('/wages', function () {
 })->middleware(['auth'])->name('/wages');
 
 Route::get('/shifts', function () {
-    // IF the user has admin permissions
-    // THEN show all shifts, show add shift buton
-    $shifts = Employee::join('employee_shift', 'employee_shift.employee_id', '=', 'employees.id')
-    ->join('shifts', 'employee_shift.shift_id', '=', 'shifts.id')
-    ->join('workplace', 'shifts.workplace_id', '=', 'workplace.id')
-    ->where('employees.id', '=', Auth::user()->employee_id)
-    ->get(['accepted','shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);
-    // ELSE show employeed shifts
+    $permissions = DB::select('select
+    permission
+    from
+    "permissions"
+    join "permission_role" on permission_role.permission_id = permissions.id
+    join "roles" on permission_role.role_id = roles.id
+    join "employees" on roles.id = employees.role_id
+    where employees.id =' . Auth::user()->employee_id);
+    
+    if (count($permissions) < 2) { // Rudimentary implementation
+        $isManager = false;
+    } else {
+        $isManager = true;
+    }
 
-    return view('shifts-list', ['shifts' =>  $shifts]);
+    if (!$isManager) {
+        $shifts = Employee::join('employee_shift', 'employee_shift.employee_id', '=', 'employees.id')
+        ->join('shifts', 'employee_shift.shift_id', '=', 'shifts.id')
+        ->join('workplace', 'shifts.workplace_id', '=', 'workplace.id')
+        ->where('employees.id', '=', Auth::user()->employee_id)
+        ->get(['accepted','shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);
+    } else {
+        $shifts = Shift::join('workplace', 'shifts.workplace_id', '=', 'workplace.id')
+        ->get(['shifts.date','shifts.starting','shifts.ending','shifts.breaks', 'workplace.name as location']);;
+    }
+
+    return view('shifts-list', ['isManager' =>  $isManager, 'shifts' =>  $shifts]);
 })->middleware(['auth'])->name('/shifts');
 
 Route::get('/shift/{id}/edit', function () {
