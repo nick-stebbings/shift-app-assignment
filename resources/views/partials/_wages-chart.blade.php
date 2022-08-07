@@ -6,9 +6,6 @@
       <div class="px-5 py-3 bg-gray-50">Wages Breakdown</div>
       <canvas class="p-10" id="chartLine"></canvas>
     </div>
-    <?php
-    // dd($shifts->values()->toArray());
-      ?>
   <?php
     $groupTotals = ($shifts->map(function($s) {
         $totals = array();

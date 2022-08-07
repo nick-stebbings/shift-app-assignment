@@ -1,7 +1,7 @@
     <x-auth-card>
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form action="{{ url('api/user/' . '1' . '/link')}}" method="POST">
+        <form action="{{ url('api/user/' . Auth::user()->id . '/link')}}" method="POST">
             <?php echo method_field('POST'); ?>
             @csrf
 

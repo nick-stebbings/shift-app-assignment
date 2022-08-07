@@ -77,7 +77,7 @@ class RegisteredUserController extends Controller
             return redirect()->back()->with('msg', 'Erro');  
             // return redirect()->back()->withErrors('Invalid credentials, try again');   
         } else {
-            $emp_id = $found->toArray()[0]['id'];
+            $emp_id = $found->values()->toArray()[0]['id'];
             User::where('id',$user_id)->update(['employee_id'=>$emp_id]);
             return redirect()->back()->with('msg', 'Success! Account linked to your record');   
         }

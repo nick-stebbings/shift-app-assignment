@@ -1,7 +1,6 @@
 @extends('layouts/app')
 @section('content')
     <x-auth-card>
-{{-- {{dd($profile)}} --}}
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
